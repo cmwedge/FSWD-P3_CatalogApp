@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-9">
+            <h3>{{ item.name|title() }}</h3>
+            {{ item.description }} <br />
+            {% if 'username' in session and session['user_id'] == item.owner_id %}
+                <br />
+                <a href="{{ url_for('editItem', item_id=item.id) }}">Edit</a> | <a href="{{ url_for('deleteItem', item_id=item.id) }}">Delete</a>
+            {% endif %}
+        </div>
+        <div class="col-xs-3">
+            {% if item.image_url %}
+                <img src="{{ item.image_url }}" class="center-block imageContainer" />
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

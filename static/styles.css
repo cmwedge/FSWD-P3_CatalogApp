@@ -1,0 +1,8 @@
+body { background-color: Gray; }
+h3 { color: Navy; }
+.container { background-color: White; }
+.catalogItemList { list-style-type: none; padding: 0px 0px 0px 15px; }
+.mainContainer { padding: 10px 10px 10px 10px; }
+.hidden { display: none; }
+.myerror { color: Red; }
+.imageContainer { max-width: 100%; }

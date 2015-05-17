@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+    {% if 'username' in session %}
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="{{ url_for('addItem') }}">Add Item</a>
+        </div>        
+    </div>
+    {% endif %}
+    <div class="row">
+        {% if latest_items %}
+        <div class="col-xs-12">
+            <h3>Latest {{ latest_items|list()|length() }} Items</h3>
+            <ul class="catalogItemList">
+            {% for item in latest_items %}
+                <li><a href="{{url_for('showItem', item_id=item.id)}}">{{ item.name|title() }}</a> ({{ item.category.name|title() }})</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="col-xs-12">
+            <h3>{{ category_items[0].category.name }}</h3>
+            <ul class="catalogItemList">
+            {% for item in category_items %}
+                <li><a href="{{url_for('showItem', item_id=item.id)}}">{{ item.name|title() }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

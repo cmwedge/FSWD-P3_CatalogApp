@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+{% block content %}
+        <form role="form" class="form-horizontal" action="{{ url_for('editItem', item_id=item.id) }}" method="post">
+            <div class="col-xs-12 form-group">
+                <h3>Edit Item</h3>
+                <label class="control-label col-xs-3">Name:</label>
+                <div class="col-xs-9 input-group">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Item Name" value="{{ item.name }}" />
+                </div>
+
+                <label class="control-label col-xs-3">Category:</label>
+                <div class="col-xs-9 input-group">                    
+                    <select class="form-control" id="category" name="category">
+                        {% for category in categories %}
+                            {% if item.category_id == category.id %}
+                                <option selected="selected" value="{{ category.id }}">{{ category.name }}</option>
+                            {% else %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="control-label col-xs-3">Description:</label>
+                <div class="col-xs-9 input-group">
+                    <textarea rows="7" class="form-control" name="description" id="description" placeholder="Item Description">{{ item.description }}</textarea>
+                </div>
+                <label class="control-label col-xs-3">Image URL:</label>
+                <div class="col-xs-9 input-group">
+                    <input type="text" class="form-control" name="imageUrl" id="imageUrl" placeholder="Image URL" value="{{ item.image_url }}" />
+                </div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <br />
+                            <div class="col-xs-9 col-xs-offset-3 input-group">
+                            {% for message in messages %}
+                                <font style="color:Red;">
+                                    {{ message }}
+                                </font>
+                                <br />
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                <br />
+                <div class="col-xs-9 col-xs-offset-3 input-group">
+                    <button type="submit" class="btn btn-default" name="save" value="save">Save</button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-default" name="cancel" value="cancel">Cancel</button>
+                </div>
+            </div>
+        </form>
+{% endblock %}
